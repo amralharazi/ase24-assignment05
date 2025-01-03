@@ -21,6 +21,4 @@ public interface UserService {
     List<User> getAll();
     @NonNull
     User getById(@NonNull UUID id) throws UserNotFoundException;
-    @NonNull
-    List<User> getByAssignee(@NonNull UUID userId) throws UserNotFoundException;
 }
