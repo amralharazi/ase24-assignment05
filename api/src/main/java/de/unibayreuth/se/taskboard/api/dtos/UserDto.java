@@ -1,22 +1,25 @@
 package de.unibayreuth.se.taskboard.api.dtos;
 
-import de.unibayreuth.se.taskboard.business.domain.TaskStatus;
 import jakarta.annotation.Nullable;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 //TODO: Add DTO for users.
-@RequiredArgsConstructor
+@Data
 public class UserDto {
-    @NotNull
+    @Nullable
     private final UUID id;
     @NotNull
-    private final String firstName;
-    @NotNull
-    private final String lastName;
+    private final String name;
+    @Nullable
+    private final LocalDateTime createdAt; // is null when using DTO to create or update a new user
+
+    public LocalDateTime getCreatedAt() {
+        return Objects.requireNonNullElseGet(createdAt, LocalDateTime::now);
+    }
 }

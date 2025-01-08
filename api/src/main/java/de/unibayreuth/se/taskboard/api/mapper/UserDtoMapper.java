@@ -18,20 +18,24 @@ import java.util.UUID;
 @NoArgsConstructor
 public abstract class UserDtoMapper {
 
-        @Mapping(target = "assignee", ignore = true)
         public abstract UserDto fromBusiness(User source);
-
-        //@Mapping(target = "assigneeId", source = "assignee.id")
+        protected boolean utcNowUpdated = false;
+        protected LocalDateTime utcNow;
         @Mapping(target = "id", ignore = true)
         @Mapping(target = "createdAt", expression = "java(mapTimestamp(source.getCreatedAt()))")
-        @Mapping(target = "updatedAt", expression = "java(mapTimestamp(source.getUpdatedAt()))")
         public abstract User toBusiness(UserDto source);
 
-        protected UserDto getUserById(UUID userId) {
-//        if (userId == null) {
-//            return null;
-//        }
-//        return userService.getById(userId).map(userDtoMapper::fromBusiness).orElse(null);
-            return null;
+        protected LocalDateTime mapTimestamp (LocalDateTime timestamp) {
+                if (timestamp == null) {
+                        // ensure that createdAt and updatedAt use exactly the same timestamp
+                        if (!utcNowUpdated) {
+                                utcNow = LocalDateTime.now(ZoneId.of("UTC"));
+                                utcNowUpdated = true;
+                        } else {
+                                utcNowUpdated = false;
+                        }
+                        return utcNow;
+                }
+                return timestamp;
         }
 }

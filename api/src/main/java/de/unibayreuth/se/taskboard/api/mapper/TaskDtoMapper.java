@@ -30,11 +30,9 @@ public abstract class TaskDtoMapper {
     protected LocalDateTime utcNow;
 
     @Mapping(target = "assignee", expression = "java(getUserById(source.getAssigneeId()))")
-    @Mapping(target = "assignee", ignore = true)
     public abstract TaskDto fromBusiness(Task source);
 
     @Mapping(target = "assigneeId", source = "assignee.id")
-    @Mapping(target = "assigneeId", ignore = true)
     @Mapping(target = "status", source = "status", defaultValue = "TODO")
     @Mapping(target = "createdAt", expression = "java(mapTimestamp(source.getCreatedAt()))")
     @Mapping(target = "updatedAt", expression = "java(mapTimestamp(source.getUpdatedAt()))")
