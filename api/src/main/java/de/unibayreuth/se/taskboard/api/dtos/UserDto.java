@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserDto {
     @NotNull
-    private final UUID id; 
+    private final UUID id;
     @NotNull
     private final String firstName;
     @NotNull

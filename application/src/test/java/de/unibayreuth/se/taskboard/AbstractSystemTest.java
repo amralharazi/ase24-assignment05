@@ -1,6 +1,7 @@
 package de.unibayreuth.se.taskboard;
 
 import de.unibayreuth.se.taskboard.business.ports.TaskService;
+import de.unibayreuth.se.taskboard.business.ports.UserService;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -43,6 +44,8 @@ public abstract class AbstractSystemTest {
 
     @Autowired
     protected TaskService taskService;
+    @Autowired
+    protected UserService userService;
 
     @LocalServerPort
     private Integer port;

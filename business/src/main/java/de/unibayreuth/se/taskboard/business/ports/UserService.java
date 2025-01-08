@@ -21,4 +21,5 @@ public interface UserService {
     List<User> getAll();
     @NonNull
     User getById(@NonNull UUID id) throws UserNotFoundException;
+    User upsert(@NonNull User user) throws UserNotFoundException;
 }
